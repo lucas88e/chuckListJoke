@@ -25,7 +25,18 @@ button {
 
 button:hover {
   background-color: #0056b3;
+  transform: scale(1.1);
 }
 
+li{
+  background-color: white;
+  padding:20px 5px;
+  border: 1ps solid gray;
+  list-style: none;
+}
 
+#removeAll{
+  background-color: red;
+  color: white
+}
 
