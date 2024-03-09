@@ -13,7 +13,7 @@ h1 {
   color: #333;
 }
 
-button {
+#fetchJoke {
   margin-top: 10px;
   padding: 8px 16px;
   font-size: 16px;
@@ -21,6 +21,8 @@ button {
   color: #fff;
   border: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
 }
 
 button:hover {
@@ -28,15 +30,31 @@ button:hover {
   transform: scale(1.1);
 }
 
-li{
+li {
   background-color: white;
-  padding:20px 5px;
-  border: 1ps solid gray;
+  padding: 10px 5px;
+  border: 1px solid gray;
   list-style: none;
+  margin: 20px;
+  border-radius: 10px;
 }
 
-#removeAll{
+#removeAll {
   background-color: red;
   color: white
 }
 
+button {
+  background-color: red;
+  margin-top: 10px;
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+
+}
+footer{
+  padding-bottom: 20px;
+}

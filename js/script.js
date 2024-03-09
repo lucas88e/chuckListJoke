@@ -1,32 +1,32 @@
 const buttonfetchJoke = document.getElementById('fetchJoke');
 const listaChistes = document.getElementById("jokeList")
 
-function getJoke(){
+function getJoke() {
     buttonfetchJoke.addEventListener('click', () => {
         fetch('https://api.chucknorris.io/jokes/random')
-        .then((response) => {
-            if(!response.ok){
-                throw new Error ('La solicitud no fue exitosa');
-            }
-            return response.json();
-        })
-        .then((data) => {
-            const jokeLi = document.createElement('li');
-            const removeJoke = document.createElement('button');
-            removeJoke.innerHTML = '<p>Eliminar</p>';
-            removeJoke.addEventListener('click', () => removeOne(jokeLi));
-            jokeLi.innerHTML = data.value;
-            jokeLi.appendChild(removeJoke);
-            listaChistes.appendChild(jokeLi);
-            saveJokeList(data.value);
-        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('La solicitud no fue exitosa');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                const jokeLi = document.createElement('li');
+                const removeJoke = document.createElement('button');
+                removeJoke.innerHTML = 'Eliminar';
+                removeJoke.addEventListener('click', () => removeOne(jokeLi));
+                jokeLi.innerHTML = `<p>${data.value}</p>`;
+                jokeLi.appendChild(removeJoke);
+                listaChistes.appendChild(jokeLi);
+                saveJokeList(data.value);
+            })
     });
 }
 getJoke()
 
-function saveJokeList(joke){
+function saveJokeList(joke) {
     let jokes = JSON.parse(localStorage.getItem('Jokes'));
-    if(jokes === null){
+    if (jokes === null) {
         jokes = [];
     };
     jokes.push(joke);
@@ -34,26 +34,27 @@ function saveJokeList(joke){
     console.log(jokes)
 }
 
-function loadJokeList(){
+function loadJokeList() {
     let jokes = JSON.parse(localStorage.getItem('Jokes'));
-    if(jokes === null){
+    if (jokes === null) {
         jokes = [];
     };
     jokes.forEach(element => {
         const jokeLi = document.createElement('li');
         const removeJoke = document.createElement('button');
-        removeJoke.innerHTML = 'Eliminar';
+        const parrafo = document.createElement('p');
+        removeJoke.innerHTML = `Eliminar`;
         removeJoke.addEventListener('click', () => removeOne(jokeLi));
-        jokeLi.innerHTML = element;
+        jokeLi.innerHTML = `Chuck dice ${element}</p>`;
         jokeLi.appendChild(removeJoke);
         listaChistes.appendChild(jokeLi);
     })
 };
 
-function removeOne(jokeLi){
+function removeOne(jokeLi) {
     listaChistes.removeChild(jokeLi);
     let jokes = JSON.parse(localStorage.getItem('Jokes'));
-    if(jokes === null){
+    if (jokes === null) {
         jokes = [];
     };
     text = jokeLi.childNodes[0].nodevalue;
@@ -61,12 +62,12 @@ function removeOne(jokeLi){
     localStorage.setItem('Jokes', JSON.stringify(jokes));
 };
 
-function remove(){
+function remove() {
     localStorage.removeItem("Jokes");
     location.reload();
 };
 
 const removeAll = document.getElementById("removeAll")
-removeAll.addEventListener("click",()=> remove())
+removeAll.addEventListener("click", () => remove())
 
 loadJokeList();
